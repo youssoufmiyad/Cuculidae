@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Cuculidae" Height="450" Width="800" Icon="assets/logo.ico">
     <Grid>
-        <TextBlock Name="clicked" HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="91" Width="330" FontSize="68"><Run Language="fr-fr" Text="not clicked"/></TextBlock>
+        <TextBlock x:Name="clicked" HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="91" Width="330" FontSize="68" Text="" />
         <Button Content="Button" HorizontalAlignment="Center" Margin="0,276,0,0" VerticalAlignment="Top" Height="48" Width="424" Cursor="Hand" Click="Button_Click"/>
 
     </Grid>
