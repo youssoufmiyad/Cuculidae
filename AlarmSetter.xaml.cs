@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 
 namespace Cuculidae
@@ -29,28 +17,57 @@ namespace Cuculidae
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void Hour_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            string previous_hour = textBox.Text;
-
-            Console.WriteLine("TEXTBOX TEXT : "+textBox.Text);
-            if (textBox.Text.Length > 2)
+            for (int i = 0; i < 24; i++)
             {
-                textBox.Text = previous_hour;
+                if (textBox.Text == i.ToString())
+                {
+                    Console.WriteLine("VALID");
+                    return;
+                }
             }
-            
+            e.Handled=false;
+            Hour.Text = "0";
+            Console.WriteLine("INVALID");
+            return;
         }
         private void Minute_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            TextBox textBox = sender as TextBox;
+            for (int i = 0; i < 60; i++)
+            {
+                if (textBox.Text == i.ToString())
+                {
+                    Console.WriteLine("VALID");
+                    return;
+                }
+            }
+            e.Handled = false;
+            Minute.Text = "0";
+            Console.WriteLine("INVALID");
+            return;
         }
 
         private void Second_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            TextBox textBox = sender as TextBox;
+            for (int i = 0; i < 60; i++)
+            {
+                if (textBox.Text == i.ToString())
+                {
+                    Console.WriteLine("VALID");
+                    return;
+                }
+            }
+            e.Handled = false;
+            Second.Text = "0";
+            Console.WriteLine("INVALID");
+            return;
         }
     }
 }
