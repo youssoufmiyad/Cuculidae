@@ -10,5 +10,6 @@
         <TextBox Name="Hour"  Width="100" Height="64" Margin="0,0,280,0" TextChanged="Hour_TextChanged" PreviewTextInput="NumberValidationTextBox" MaxLength="2" FontSize="50" TextAlignment="Center"></TextBox>
         <TextBox Name="Minute" Width="100" Height="64" Margin="140,0,140,0" TextChanged="Minute_TextChanged" PreviewTextInput="NumberValidationTextBox" MaxLength="2" FontSize="50" TextAlignment="Center"></TextBox>
         <TextBox Name="Second" Width="100" Height="64" Margin="280,0,0,0" TextChanged="Second_TextChanged" PreviewTextInput="NumberValidationTextBox" MaxLength="2" FontSize="50" TextAlignment="Center"></TextBox>
+        <Button Content="Valider" HorizontalAlignment="Center" Margin="0,276,0,0" VerticalAlignment="Top" Height="48" Width="424" Cursor="Hand" Click="Button_Click"/>
     </Grid>
 </UserControl>
