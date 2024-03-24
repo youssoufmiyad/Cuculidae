@@ -40,7 +40,8 @@ namespace Cuculidae
             DateTime d;
             d = DateTime.Now;
             clicked.Text= d.Hour + " : " + d.Minute + " : " + d.Second;
-            alarm_worker.RunWorkerAsync(argument: clicked.Text);
+            
+            alarm_worker.RunWorkerAsync(argument: alarm);
             if (alarm.hours != null)
             {
                 Console.Write(alarm.hours);
@@ -55,12 +56,13 @@ namespace Cuculidae
         {
             Console.WriteLine("worker checking");
             bool contains = false;
-            String hour = (string)e.Argument;
-            Console.WriteLine("hour : "+ hour);
-            if (hour == "23 : 33 : 15") { contains = true; };
+            AlarmSetter.Alarm alarm_check = (AlarmSetter.Alarm)e.Argument;
+            DateTime d = DateTime.Now;
+            if (d.Hour.ToString() == alarm_check.hours & d.Minute.ToString() == alarm_check.minutes & d.Second.ToString() == alarm_check.seconds) { contains = true; };
             if (contains == true)
             {
-                Console.WriteLine("L'heure est bien 23 : 33 : 15");
+                Console.WriteLine("L'heure est bien " + alarm_check.ToString());
+                
             }
 
         }

@@ -27,6 +27,11 @@ namespace Cuculidae
             alarm.hours = hours;
             alarm.minutes = minutes;
             alarm.seconds = seconds;
+            Valid.IsEnabled = false;
+            Hour.IsEnabled = false;
+            Minute.IsEnabled = false;
+            Second.IsEnabled = false;
+
             try
             {
                 Console.WriteLine("hours : ");
@@ -116,6 +121,11 @@ namespace Cuculidae
                 hours = null;
                 minutes = null;
                 seconds = null;
+            }
+
+            public override string ToString()
+            {
+                return hours+" : "+minutes+" : "+seconds;
             }
         }
     }
