@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Threading;
 
 namespace Cuculidae
 {
@@ -9,21 +8,20 @@ namespace Cuculidae
     /// </summary>
     public partial class MainWindow : Window
     {
-        BackgroundWorker worker = new BackgroundWorker();
+        BackgroundWorker alarm_worker = new BackgroundWorker();
         System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
+
+        public static AlarmSetter.Alarm alarm = AlarmSetter.alarm;
         public MainWindow()
         {
             InitializeComponent();
 
             // DoWork handler
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            // ProgressChanged handler
-            worker.ProgressChanged += worker_ProgressChanged;
+            alarm_worker.DoWork += new DoWorkEventHandler(alarm_worker_DoWork);
             // WorkerCompleted handler
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            alarm_worker.RunWorkerCompleted += alarm_worker_RunWorkerCompleted;
 
-            worker.WorkerSupportsCancellation = true;
-            worker.WorkerReportsProgress = true;
+            alarm_worker.WorkerSupportsCancellation = true;
 
 
             Timer.Tick += new EventHandler(TimerUpdate);
@@ -42,22 +40,24 @@ namespace Cuculidae
             DateTime d;
             d = DateTime.Now;
             clicked.Text= d.Hour + " : " + d.Minute + " : " + d.Second;
-            worker.RunWorkerAsync(argument: clicked.Text);
+            alarm_worker.RunWorkerAsync(argument: clicked.Text);
+            if (alarm.hours != null)
+            {
+                Console.Write(alarm.hours);
+                Console.WriteLine("Alarme enregistrée");
+            }
+            
+            Console.WriteLine("");
 
         }
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        private void alarm_worker_DoWork(object sender, DoWorkEventArgs e)
         {
             Console.WriteLine("worker checking");
             bool contains = false;
             String hour = (string)e.Argument;
             Console.WriteLine("hour : "+ hour);
-            Console.WriteLine(hour.Length);
             if (hour == "23 : 33 : 15") { contains = true; };
-/*            for (int i = 0; i < hour.Length; i++)
-            {
-                if (hour[i] == '2') { contains = true; };
-            }*/
             if (contains == true)
             {
                 Console.WriteLine("L'heure est bien 23 : 33 : 15");
@@ -65,27 +65,14 @@ namespace Cuculidae
 
         }
 
-        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void alarm_worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
         }
 
-        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void AlarmSetter_Loaded(object sender, RoutedEventArgs e)
         {
 
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            worker.RunWorkerAsync();
-
-            //if (Timer.IsEnabled)
-            //{
-            //    Timer.Stop();
-            //}
-            //else
-            //{
-            //    Timer.Start();
-            //}
         }
     }
 }
